@@ -43,8 +43,7 @@ namespace Devtools.Client.Helpers {
                 try {
                     LastUpdate = DateTime.UtcNow;
                     CachedVal = await UpdateAsync();
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     Log.Error(ex);
                 }
 

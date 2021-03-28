@@ -1,4 +1,5 @@
 ﻿using System;
+
 #if CLIENT
 using CitizenFX.Core;
 
@@ -35,9 +36,9 @@ namespace Devtools.Client.Helpers {
             try {
                 var m = $"[{title}] {msg}";
 #if SERVER
-				Console.ForegroundColor = color;
-				Console.WriteLine( $"{DateTime.Now:HH:mm:ss.fff} {m}" );
-				Console.ResetColor();
+                Console.ForegroundColor = color;
+                Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} {m}");
+                Console.ResetColor();
 #else
                 Debug.WriteLine(m);
 #endif
