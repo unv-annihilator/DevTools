@@ -1,58 +1,57 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Devtools.Client.Helpers
-{
-	public abstract class CachedValue<T>
-	{
+namespace Devtools.Client.Helpers {
+    public abstract class CachedValue<T> {
+        protected T CachedVal;
+        protected DateTime LastUpdate = DateTime.MinValue;
 
-		public float Expiration { get; }
-		protected DateTime LastUpdate = DateTime.MinValue;
-		protected T CachedVal;
+        protected CachedValue(float expirationMs) {
+            Expiration = expirationMs;
+        }
 
-		public T Value
-		{
-			get {
-				if( !((DateTime.UtcNow - LastUpdate).TotalMilliseconds > Expiration) ) return CachedVal;
+        public float Expiration { get; }
 
-				CachedVal = Update();
-				LastUpdate = DateTime.UtcNow;
-				return CachedVal;
-			}
-		}
+        public T Value
+        {
+            get
+            {
+                if (!((DateTime.UtcNow - LastUpdate).TotalMilliseconds > Expiration)) return CachedVal;
 
-		protected CachedValue( float expirationMs ) {
-			Expiration = expirationMs;
-		}
+                CachedVal = Update();
+                LastUpdate = DateTime.UtcNow;
+                return CachedVal;
+            }
+        }
 
-		protected abstract T Update();
-	}
+        protected abstract T Update();
+    }
 
-	public abstract class CachedValueAsync<T> : CachedValue<T>
-	{
-		private bool _lock;
+    public abstract class CachedValueAsync<T> : CachedValue<T> {
+        private bool _lock;
 
-		protected CachedValueAsync( float expirationMs, T defaultValue = default( T ) ) : base( expirationMs ) {
-			CachedVal = defaultValue;
-		}
+        protected CachedValueAsync(float expirationMs, T defaultValue = default) : base(expirationMs) {
+            CachedVal = defaultValue;
+        }
 
-		protected override T Update() {
-			if( _lock ) return CachedVal;
-			_lock = true;
+        protected override T Update() {
+            if (_lock) return CachedVal;
+            _lock = true;
 
-			Task.Factory.StartNew( async () => {
-				try {
-					LastUpdate = DateTime.UtcNow;
-					CachedVal = await UpdateAsync();
-				}
-				catch( Exception ex ) {
-					Log.Error( ex );
-				}
-				_lock = false;
-			} );
-			return CachedVal;
-		}
+            Task.Factory.StartNew(async () => {
+                try {
+                    LastUpdate = DateTime.UtcNow;
+                    CachedVal = await UpdateAsync();
+                }
+                catch (Exception ex) {
+                    Log.Error(ex);
+                }
 
-		protected abstract Task<T> UpdateAsync();
-	}
+                _lock = false;
+            });
+            return CachedVal;
+        }
+
+        protected abstract Task<T> UpdateAsync();
+    }
 }

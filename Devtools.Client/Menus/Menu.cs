@@ -3,68 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using CitizenFX.Core.Native;
 
-namespace Devtools.Client.Menus
-{
-	public class Menu : List<MenuItem>
-	{
-		public string Title { get; protected set; }
-		public Menu Parent { get; }
+namespace Devtools.Client.Menus {
+    public class Menu : List<MenuItem> {
 
-		private int _index;
-		public int CurrentIndex
-		{
-			get => Math.Max( 0, Math.Min( _index, VisibleCount - 1 ) );
-			set {
-				if( value < 0 ) {
-					value = VisibleCount - 1;
-				}
-				_index = Math.Max( 0, value % VisibleCount );
+        private int _index;
 
-				var item = GetVisibleItems().ElementAt( _index );
-				item.Select.Invoke();
-			}
-		}
+        public Menu(string title, Menu parent = null) {
+            Title = title;
+            Parent = parent;
+        }
 
-		public int VisibleCount => GetVisibleItems().Count();
+        public string Title { get; protected set; }
+        public Menu Parent { get; }
 
-		public MenuItem CurrentItem => GetVisibleItems().ElementAt( CurrentIndex );
+        public int CurrentIndex
+        {
+            get => Math.Max(0, Math.Min(_index, VisibleCount - 1));
+            set
+            {
+                if (value < 0) value = VisibleCount - 1;
+                _index = Math.Max(0, value % VisibleCount);
 
-		public Menu( string title, Menu parent = null ) {
-			Title = title;
-			Parent = parent;
-		}
+                var item = GetVisibleItems().ElementAt(_index);
+                item.Select.Invoke();
+            }
+        }
 
-		public virtual void OnEnter() {
+        public int VisibleCount => GetVisibleItems().Count();
 
-		}
+        public MenuItem CurrentItem => GetVisibleItems().ElementAt(CurrentIndex);
 
-		public virtual void OnExit() {
-		}
+        public virtual void OnEnter() {
+        }
 
-		public new bool Remove( MenuItem i ) {
-			var remove = base.Remove( i );
-			Refresh();
-			return remove;
-		}
+        public virtual void OnExit() {
+        }
 
-		public new void Add( MenuItem item ) {
-			base.Add( item );
-			Refresh();
-		}
+        public new bool Remove(MenuItem i) {
+            var remove = base.Remove(i);
+            Refresh();
+            return remove;
+        }
 
-		public new void AddRange( IEnumerable<MenuItem> items ) {
-			base.AddRange( items );
-			Refresh();
-		}
+        public new void Add(MenuItem item) {
+            base.Add(item);
+            Refresh();
+        }
 
-		private void Refresh() {
-			Sort( ( a, b ) => b.Priority - a.Priority );
-			CurrentIndex = _index;
-		}
+        public new void AddRange(IEnumerable<MenuItem> items) {
+            base.AddRange(items);
+            Refresh();
+        }
 
-		public IEnumerable<MenuItem> GetVisibleItems() {
-			return this.Where( i => i.IsVisible );
-		}
-	}
+        private void Refresh() {
+            Sort((a, b) => b.Priority - a.Priority);
+            CurrentIndex = _index;
+        }
+
+        public IEnumerable<MenuItem> GetVisibleItems() {
+            return this.Where(i => i.IsVisible);
+        }
+    }
 
 }

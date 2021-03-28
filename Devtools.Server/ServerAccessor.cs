@@ -1,11 +1,10 @@
-﻿namespace Devtools.Server
-{
-	public class ServerAccessor
-	{
-		protected Server Server { get; }
+﻿namespace Devtools.Server {
+    public class ServerAccessor {
 
-		public ServerAccessor( Server server ) {
-			Server = server;
-		}
-	}
+        public ServerAccessor(Server server) {
+            Server = server;
+        }
+
+        protected Server Server { get; }
+    }
 }
