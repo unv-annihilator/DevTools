@@ -5,7 +5,8 @@ namespace Devtools.Client.Menus {
     public class MenuItem {
         private static int _menuItems = short.MaxValue;
 
-        internal Func<Task> Select, Activate, Left, Right;
+        internal readonly Func<Task> Select, Left, Right;
+        internal Func<Task> Activate;
 
         public MenuItem(Client client, Menu owner, string label, int priority = -1) {
             Client = client;
@@ -24,11 +25,11 @@ namespace Devtools.Client.Menus {
 
         public int Priority { get; }
 
-        public string Label { get; set; }
+        public string Label { get; protected set; }
 
         protected Client Client { get; }
 
-        public virtual bool IsVisible { get; set; } = true;
+        public virtual bool IsVisible { get; } = true;
 
         protected virtual Task OnSelect() {
             return Task.FromResult(0);

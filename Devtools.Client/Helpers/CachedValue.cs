@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+// ReSharper disable once CheckNamespace
 namespace Devtools.Client.Helpers {
     public abstract class CachedValue<T> {
         protected T CachedVal;
@@ -10,7 +11,7 @@ namespace Devtools.Client.Helpers {
             Expiration = expirationMs;
         }
 
-        public float Expiration { get; }
+        private float Expiration { get; }
 
         public T Value
         {

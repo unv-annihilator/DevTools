@@ -7,6 +7,7 @@ using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using CitizenFX.Core.UI;
 using Devtools.Client.Helpers;
+using Font = CitizenFX.Core.UI.Font;
 
 namespace Devtools.Client.Menus {
     public class MenuController : ClientAccessor {
@@ -76,11 +77,10 @@ namespace Devtools.Client.Menus {
 
         public bool DisableControls { get; set; }
 
-        public bool RegisterMenuHotkey(Control control, Menu menu) {
-            if (_hotkeyMenus.ContainsKey(control)) return false;
+        public void RegisterMenuHotkey(Control control, Menu menu) {
+            if (_hotkeyMenus.ContainsKey(control)) return;
 
             _hotkeyMenus.Add(control, menu);
-            return true;
         }
 
         #region Drawing
@@ -137,8 +137,7 @@ namespace Devtools.Client.Menus {
 
                     yOffset += ItemOffsetY + 0.0028f;
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -221,8 +220,7 @@ namespace Devtools.Client.Menus {
 
                     Game.DisableControlThisFrame(2, kvp.Key);
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -262,8 +260,7 @@ namespace Devtools.Client.Menus {
                         CurrentMenu.CurrentItem.Activate.Invoke();
                         break;
                 }
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 // ignored
             }
         }

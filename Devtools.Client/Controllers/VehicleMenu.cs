@@ -112,10 +112,10 @@ namespace Devtools.Client.Controllers {
             client.RegisterTickHandler(OnTick);
         }
 
-        public bool IsInvincible { get; set; }
-        public bool IsInvisible { get; set; }
-        public bool HasNeon { get; set; }
-        public Color NeonColor { get; set; } = Color.FromArgb(255, 50, 100);
+        private bool IsInvincible { get; set; }
+        private bool IsInvisible { get; set; }
+        private bool HasNeon { get; set; }
+        private Color NeonColor { get; set; } = Color.FromArgb(255, 50, 100);
 
         private async Task OnTick() {
             try {
@@ -136,8 +136,7 @@ namespace Devtools.Client.Controllers {
                     Game.PlayerPed.CurrentVehicle.Repair();
                     Game.PlayerPed.CurrentVehicle.Wash();
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -213,8 +212,7 @@ namespace Devtools.Client.Controllers {
                         else
                             UiHelper.ShowNotification(
                                 $"~r~ERROR~s~: Could not load model {modelName}. The vehicle model may still be loading.");
-                    }
-                    catch (Exception ex) {
+                    } catch (Exception ex) {
                         Log.Error(ex);
                     }
                 };

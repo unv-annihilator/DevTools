@@ -20,13 +20,16 @@ namespace Devtools.Client.Controllers {
             [CloudHatType.Shower] = "shower"
         };
 
+/*
         private CloudHatType _cloudHat;
+*/
 
         public CloudHatMenu(Client client, Menu parent) : base("Cloud Hat Menu", parent) {
             foreach (CloudHatType type in Enum.GetValues(typeof(CloudHatType)))
                 Add(new MenuItemWeather(client, this, Enum.GetName(typeof(CloudHatType), type) ?? "", type));
         }
 
+/*
         /// <summary>
         ///     Sets the cloud hat type to whatever you define it to.
         /// </summary>
@@ -45,6 +48,7 @@ namespace Devtools.Client.Controllers {
                 }
             }
         }
+*/
 
         private class MenuItemWeather : MenuItem {
 

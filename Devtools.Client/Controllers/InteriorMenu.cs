@@ -7,6 +7,8 @@ using CitizenFX.Core.Native;
 using Devtools.Client.Helpers;
 using Devtools.Client.Menus;
 
+// ReSharper disable StringLiteralTypo
+
 namespace Devtools.Client.Controllers {
     public class InteriorMenu : Menu {
         /// <summary>
@@ -448,6 +450,7 @@ namespace Devtools.Client.Controllers {
         }
     }
 
+    // ReSharper disable UnusedMember.Global
     public enum InteriorCategory {
         OnlineBunkerExterior,
         OnlineApartments,
@@ -464,6 +467,7 @@ namespace Devtools.Client.Controllers {
         ConveienceStores,
         Garages
     }
+    // ReSharper restore UnusedMember.Global
 
     public class InteriorModel {
 
@@ -474,10 +478,10 @@ namespace Devtools.Client.Controllers {
             Position = position;
         }
 
-        public InteriorCategory Category { get; set; }
-        public string Name { get; set; }
-        public List<string> Interior { get; set; }
-        public Vector3 Position { get; set; }
+        public InteriorCategory Category { get; }
+        public string Name { get; }
+        public List<string> Interior { get; }
+        public Vector3 Position { get; }
         public bool IsLoaded { get; set; }
         public Dictionary<string, bool> InteriorProps { get; set; } = new Dictionary<string, bool>();
     }
@@ -485,8 +489,6 @@ namespace Devtools.Client.Controllers {
     public class MenuItemInterior : Menu {
 
         public MenuItemInterior(Client client, Menu owner, InteriorModel interior) : base(interior.Name, owner) {
-            Interior = interior;
-
             var tele = new MenuItem(client, owner, "Teleport");
             tele.Activate += async () => {
                 API.DoScreenFadeOut(200);
@@ -540,7 +542,5 @@ namespace Devtools.Client.Controllers {
                 Add(new MenuItemSubMenu(client, this, propMenu, "Interior Props"));
             }
         }
-
-        public InteriorModel Interior { get; set; }
     }
 }

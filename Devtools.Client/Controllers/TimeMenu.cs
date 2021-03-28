@@ -53,7 +53,7 @@ namespace Devtools.Client.Controllers {
             client.RegisterTickHandler(OnTick);
         }
 
-        public DateTime CurrentDate
+        private DateTime CurrentDate
         {
             get
             {
@@ -66,27 +66,27 @@ namespace Devtools.Client.Controllers {
         }
 
         // NOTE: 1:1 is 48 minutes (GTA Standard). To calculate a multiplier given minutes, use equation: (86400 / (mins * 60)) / 30
-        public float SpeedMultiplier { get; set; }
+        private float SpeedMultiplier { get; set; }
 
-        public int Hour
+        private int Hour
         {
             get => _pauseClock ? _pauseHour : Function.Call<int>(Hash.GET_CLOCK_HOURS);
             set => Function.Call(Hash.NETWORK_OVERRIDE_CLOCK_TIME, MathUtil.Clamp(value % 24, 0, 23), Minute, Second);
         }
 
-        public int Minute
+        private int Minute
         {
             get => _pauseClock ? _pauseMinute : Function.Call<int>(Hash.GET_CLOCK_MINUTES);
             set => Function.Call(Hash.NETWORK_OVERRIDE_CLOCK_TIME, Hour, MathUtil.Clamp(value % 60, 0, 59), Second);
         }
 
-        public int Second
+        private int Second
         {
             get => _pauseClock ? _pauseSecond : Function.Call<int>(Hash.GET_CLOCK_SECONDS);
             set => Function.Call(Hash.NETWORK_OVERRIDE_CLOCK_TIME, Hour, Minute, MathUtil.Clamp(value % 60, 0, 59));
         }
 
-        public bool PauseClock
+        private bool PauseClock
         {
             get => _pauseClock;
             set
@@ -119,8 +119,7 @@ namespace Devtools.Client.Controllers {
 
                 if (!PauseClock)
                     await BaseScript.Delay((int) Math.Floor(30 / SpeedMultiplier) / 1000);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }

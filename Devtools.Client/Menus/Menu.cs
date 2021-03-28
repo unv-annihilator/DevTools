@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CitizenFX.Core.Native;
 
 namespace Devtools.Client.Menus {
     public class Menu : List<MenuItem> {
@@ -13,7 +12,7 @@ namespace Devtools.Client.Menus {
             Parent = parent;
         }
 
-        public string Title { get; protected set; }
+        public string Title { get; }
         public Menu Parent { get; }
 
         public int CurrentIndex
@@ -29,7 +28,7 @@ namespace Devtools.Client.Menus {
             }
         }
 
-        public int VisibleCount => GetVisibleItems().Count();
+        private int VisibleCount => GetVisibleItems().Count();
 
         public MenuItem CurrentItem => GetVisibleItems().ElementAt(CurrentIndex);
 
@@ -39,10 +38,9 @@ namespace Devtools.Client.Menus {
         public virtual void OnExit() {
         }
 
-        public new bool Remove(MenuItem i) {
-            var remove = base.Remove(i);
-            Refresh();
-            return remove;
+        protected new void Remove(MenuItem i) {
+            if (base.Remove(i))
+                Refresh();
         }
 
         public new void Add(MenuItem item) {

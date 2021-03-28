@@ -1,7 +1,7 @@
 ﻿namespace Devtools.Server {
     public class ServerAccessor {
 
-        public ServerAccessor(Server server) {
+        protected ServerAccessor(Server server) {
             Server = server;
         }
 

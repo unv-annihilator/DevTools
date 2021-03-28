@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 using CitizenFX.Core;
 using Devtools.Client.Controllers;
 using Devtools.Client.Menus;
+using JetBrains.Annotations;
 
 namespace Devtools.Client {
+    [UsedImplicitly]
     public class Client : BaseScript {
 
         private bool _isInstantiated;
@@ -13,7 +15,7 @@ namespace Devtools.Client {
             Menu = new MenuController(this);
             Tools = new DevTools(this);
             NoClip = new NoclipController(this);
-            Debugger = new EntityDebugger(this);
+            new EntityDebugger(this);
             PlayerList = Players;
 
             RegisterEventHandler("playerSpawned", new Action(OnSpawn));
@@ -22,11 +24,10 @@ namespace Devtools.Client {
                 OnSpawn();
         }
 
-        public PlayerList PlayerList { get;  }
+        public PlayerList PlayerList { get; }
         public DevTools Tools { get; }
         public MenuController Menu { get; }
         public NoclipController NoClip { get; }
-        public EntityDebugger Debugger { get; }
 
         private void OnSpawn() {
             if (!_isInstantiated)
@@ -42,8 +43,10 @@ namespace Devtools.Client {
             Tick += tick;
         }
 
+/*
         public void DeregisterTickHandler(Func<Task> tick) {
             Tick -= tick;
         }
+*/
     }
 }

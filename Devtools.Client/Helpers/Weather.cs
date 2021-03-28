@@ -1,4 +1,6 @@
-﻿namespace Devtools.Client.Helpers {
+﻿// ReSharper disable UnusedMember.Global
+
+namespace Devtools.Client.Helpers {
     public enum WeatherType {
         Clear,
         ExtraSunny,

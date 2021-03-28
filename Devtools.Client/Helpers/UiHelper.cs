@@ -5,10 +5,11 @@ using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using CitizenFX.Core.UI;
 using Devtools.Client.Menus;
+using Font = CitizenFX.Core.UI.Font;
 
 namespace Devtools.Client.Helpers {
     public static class UiHelper {
-        public static readonly Color DefaultColor = Color.FromArgb(255, 255, 255);
+        private static readonly Color DefaultColor = Color.FromArgb(255, 255, 255);
 
         public static void DrawText(string text, Vector2 pos, Color? color = null, float scale = 0.25f,
             bool shadow = false, float shadowOffset = 1f, Alignment alignment = Alignment.Left, Font font = Font.ChaletLondon) {
@@ -24,8 +25,7 @@ namespace Devtools.Client.Helpers {
                 Function.Call(Hash._SET_TEXT_ENTRY, "STRING");
                 Function.Call(Hash.ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME, text);
                 Function.Call(Hash._DRAW_TEXT, pos.X, pos.Y);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -33,8 +33,7 @@ namespace Devtools.Client.Helpers {
         public static void DrawRect(float xPos, float yPos, float xScale, float yScale, Color color) {
             try {
                 Function.Call(Hash.DRAW_RECT, xPos, yPos, xScale, yScale, color.R, color.G, color.B, color.A);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -81,8 +80,7 @@ namespace Devtools.Client.Helpers {
                 }
 
                 result = API.GetOnscreenKeyboardResult();
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
 

@@ -1,7 +1,7 @@
 ﻿namespace Devtools.Client {
     public class ClientAccessor {
 
-        public ClientAccessor(Client client) {
+        protected ClientAccessor(Client client) {
             Client = client;
         }
 

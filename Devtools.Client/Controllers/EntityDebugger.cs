@@ -14,17 +14,17 @@ namespace Devtools.Client.Controllers {
 
         private static readonly Vector2 DefaultPos = new Vector2(0.6f, 0.5f);
 
-        private static PlayerList Players;
+        private static PlayerList _players;
         private bool _track;
 
-        public Entity _trackingEntity;
+        private Entity _trackingEntity;
 
         public EntityDebugger(Client client) : base(client) {
             Client.RegisterTickHandler(OnTick);
-            Players = Client.PlayerList;
+            _players = Client.PlayerList;
         }
 
-        public bool IsEnabled { get; set; }
+        private bool IsEnabled { get; set; }
 
         private Dictionary<string, string> GetDataFor(Entity entity) {
             var list = new Dictionary<string, string>();
@@ -37,7 +37,7 @@ namespace Devtools.Client.Controllers {
                 list["Model Hash (Hex)"] = $"0x{entity.Model.Hash:X}";
                 list[""] = "";
 
-                var player = Players.FirstOrDefault(p => p.Character == entity);
+                var player = _players.FirstOrDefault(p => p.Character == entity);
                 if (player != null) {
                     list["Player Name"] = player.Name;
                     list["Server ID"] = $"{player.ServerId}";
@@ -62,8 +62,7 @@ namespace Devtools.Client.Controllers {
                 list["Position"] = $"{pos.X:n5} {pos.Y:n5} {pos.Z:n5}";
                 list["Rotation"] = $"{rot.X:n5} {rot.Y:n5} {rot.Z:n5}";
                 list["Velocity"] = $"{vel.X:n5} {vel.Y:n5} {vel.Z:n5}";
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
 
@@ -106,8 +105,7 @@ namespace Devtools.Client.Controllers {
 
                     DrawData(_trackingEntity);
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
                 await BaseScript.Delay(100);
             }

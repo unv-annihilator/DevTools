@@ -30,11 +30,11 @@ namespace Devtools.Client.Controllers {
             Client.RegisterTickHandler(CheckInputRotation);
         }
 
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; private set; }
 
-        public float Speed { get; set; } = 1f;
+        private float Speed { get; set; } = 1f;
 
-        public Camera CurrentCamera { get; set; }
+        public Camera CurrentCamera { get; private set; }
 
         private async Task OnTick() {
             try {
@@ -111,8 +111,7 @@ namespace Devtools.Client.Controllers {
                 Game.PlayerPed.Heading = Math.Max(0f, (360 + CurrentCamera.Rotation.Z) % 360f);
                 Game.PlayerPed.Opacity = 0;
                 API.DisablePlayerFiring(Game.Player.Handle, false);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -135,8 +134,7 @@ namespace Devtools.Client.Controllers {
                 if (rotation.X + yValue > MinY && rotation.X + yValue < MaxY)
                     rotation.X += yValue;
                 CurrentCamera.Rotation = rotation;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }

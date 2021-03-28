@@ -57,17 +57,17 @@ namespace Devtools.Client.Controllers {
             Client.RegisterEventHandler("Player.Bring", new Action<int, float, float, float>(OnPlayerBring));
         }
 
-        public bool KeyCodeTest { get; set; }
+        private bool KeyCodeTest { get; set; }
 
         private void OnPlayerBring(int serverId, float x, float y, float z) {
             try {
-                var target = Client.PlayerList.FirstOrDefault(p => p.ServerId == serverId);
+                PlayerList players = Client.PlayerList;
+                var target = players.FirstOrDefault(p => p.ServerId == serverId);
                 if (target != null) {
                     Game.PlayerPed.PositionNoOffset = new Vector3(x, y, z);
                     UiHelper.ShowNotification($"You were brought by ~g~{target.Name}~s~.");
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -125,8 +125,7 @@ namespace Devtools.Client.Controllers {
                     UiHelper.DrawText($@"{{{string.Join(", ", key.Controls)}}}", new Vector2(0.55f, 1f) - new Vector2(0f, offsetY),
                         color, 0.3f);
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
@@ -157,15 +156,14 @@ namespace Devtools.Client.Controllers {
                     _keyEvents.RemoveAll(e => (DateTime.UtcNow - e.Time).TotalSeconds > 5f);
                     _lastCollection = DateTime.UtcNow;
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }
 
         private class KeyCodeEvent {
-            public DateTime Time { get; set; } = DateTime.UtcNow;
-            public List<string> Controls { get; set; } = new List<string>();
+            public DateTime Time { get; } = DateTime.UtcNow;
+            public List<string> Controls { get; } = new List<string>();
         }
     }
 }

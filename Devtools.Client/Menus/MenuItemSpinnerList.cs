@@ -13,7 +13,7 @@ namespace Devtools.Client.Menus {
         }
 
         protected override dynamic MaxValue => Data.Count;
-        public List<T> Data { get; set; }
+        public List<T> Data { get; }
 
         public override string GetDisplay() {
             return Data.ElementAt((int) MathUtil.Clamp((int) Value, 0, MaxValue - 1)).ToString();

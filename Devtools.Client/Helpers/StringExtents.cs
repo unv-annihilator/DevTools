@@ -1,5 +1,6 @@
 ﻿using System.Text;
 
+// ReSharper disable once CheckNamespace
 namespace Devtools.Client.Helpers {
     public static class StringExtents {
         public static string ToTitleCase(this string s) {
@@ -18,7 +19,7 @@ namespace Devtools.Client.Helpers {
             return string.Join(" ", words);
         }
 
-        public static string AddSpacesToCamelCase(this string s) {
+        private static string AddSpacesToCamelCase(this string s) {
             var chars = s.ToCharArray();
             var sb = new StringBuilder();
             foreach (var c in chars)

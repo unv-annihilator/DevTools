@@ -4,6 +4,7 @@ using CitizenFX.Core;
 
 #endif
 
+// ReSharper disable once CheckNamespace
 namespace Devtools.Client.Helpers {
     public static class Log {
         public static void Info(string msg) {

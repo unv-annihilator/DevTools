@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
@@ -57,8 +56,7 @@ namespace Devtools.Client.Controllers {
                 World.DrawMarker(MarkerType.VerticalCylinder, Game.PlayerPed.Position - new Vector3(0f, 0f, _voipRange / 2f), Vector3.Zero,
                     Vector3.Zero, Vector3.One * _voipRange * 2f,
                     Color.FromArgb((int) Math.Floor(120 * opacity), 255, 255, 0));
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
                 await BaseScript.Delay(1000);
             }
@@ -131,8 +129,7 @@ namespace Devtools.Client.Controllers {
                 }
 
                 await BaseScript.Delay(1000);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
                 await BaseScript.Delay(1000);
             }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using CitizenFX.Core.Native;
 using Devtools.Client.Helpers;
@@ -11,16 +8,13 @@ namespace Devtools.Client.Controllers {
     public class TimeCycleMenu : Menu {
         public TimeCycleMenu(Client client, Menu parent) : base("Time Cycles", parent) {
             foreach (TimeCycle cycle in Enum.GetValues(typeof(TimeCycle)))
-                Add(new MenuItemTimeCycle(client, this, Enum.GetName(typeof(TimeCycle), cycle) ?? "default", cycle));
+                Add(new MenuItemTimeCycle(client, this, Enum.GetName(typeof(TimeCycle), cycle) ?? "default"));
         }
 
         private class MenuItemTimeCycle : MenuItem {
 
-            public MenuItemTimeCycle(Client client, Menu owner, string label, TimeCycle timeCycle, int priority = -1) : base(client, owner,
-                label, priority) {
-                this.TimeCycle = timeCycle;
+            public MenuItemTimeCycle(Client client, Menu owner, string label, int priority = -1) : base(client, owner, label, priority) {
             }
-            private TimeCycle TimeCycle { get; }
 
             protected override Task OnActivate() {
                 Function.Call(Hash.SET_TIMECYCLE_MODIFIER, Label);

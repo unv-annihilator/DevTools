@@ -1,4 +1,6 @@
-﻿namespace Devtools.Client.Helpers {
+﻿// ReSharper disable InconsistentNaming
+
+namespace Devtools.Client.Helpers {
     public enum ObjectHash {
         _02gate3_l = -1267889684,
         ap1_lod_emi_a_slod3 = 2083865423,

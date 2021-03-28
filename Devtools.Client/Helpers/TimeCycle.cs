@@ -1,4 +1,7 @@
-﻿namespace Devtools.Client.Helpers {
+﻿// ReSharper disable InconsistentNaming
+// ReSharper disable UnusedMember.Global
+
+namespace Devtools.Client.Helpers {
     public enum TimeCycle {
         AmbientPUSH,
         AP1_01_B_IntRefRange,

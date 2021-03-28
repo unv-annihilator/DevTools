@@ -46,10 +46,10 @@ namespace Devtools.Server {
         }
 
         private class PendingRequest : TaskCompletionSource<string> {
-            public int Token;
+            private readonly int _token;
 
             public PendingRequest(int token) {
-                Token = token;
+                _token = token;
             }
         }
     }

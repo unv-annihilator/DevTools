@@ -8,7 +8,7 @@ namespace Devtools.Client.Menus {
         private dynamic _value;
         internal Func<dynamic, dynamic> ValueUpdate;
 
-        public MenuItemSpinner(Client client, Menu owner, string label, dynamic defaultValue, dynamic min, dynamic max, dynamic step,
+        protected MenuItemSpinner(Client client, Menu owner, string label, dynamic defaultValue, dynamic min, dynamic max, dynamic step,
             bool modulus = false, int priority = -1) : base(client, owner, label, priority) {
             MinValue = min;
             MaxValue = max;

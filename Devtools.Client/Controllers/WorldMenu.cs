@@ -66,8 +66,7 @@ namespace Devtools.Client.Controllers {
                     _cloudHat = value;
                     var val = CloudHats.ContainsKey(_cloudHat) ? CloudHats[_cloudHat] : Enum.GetName(typeof(CloudHatType), _cloudHat) ?? "";
                     Function.Call(Hash._SET_CLOUD_HAT_TRANSITION, val, 1f);
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     Log.Error(ex);
                 }
             }
@@ -76,7 +75,7 @@ namespace Devtools.Client.Controllers {
         /// <summary>
         ///     Blacks out light emissions, headlights, and interior lights.
         /// </summary>
-        public bool Blackout
+        private bool Blackout
         {
             get => _isBlackout;
             set
@@ -86,8 +85,8 @@ namespace Devtools.Client.Controllers {
             }
         }
 
-        public float VehicleDensity { get; set; } = 1f;
-        public float PedDensity { get; set; } = 1f;
+        private float VehicleDensity { get; set; } = 1f;
+        private float PedDensity { get; set; } = 1f;
 
         private async Task OnTick() {
             try {
@@ -97,8 +96,7 @@ namespace Devtools.Client.Controllers {
 
                 Function.Call(Hash.SET_PED_DENSITY_MULTIPLIER_THIS_FRAME, PedDensity);
                 Function.Call(Hash.SET_SCENARIO_PED_DENSITY_MULTIPLIER_THIS_FRAME, PedDensity);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
                 await BaseScript.Delay(100);
             }
