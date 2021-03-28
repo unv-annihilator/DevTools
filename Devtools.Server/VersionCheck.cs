@@ -39,8 +39,7 @@ namespace Devtools.Server {
                 if (!_needsUpdate) return;
 
                 source.TriggerEvent("UI.ShowNotification", "~y~WARNING~s~:~n~Your version of DevTools is ~r~Outdated~s~.");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }

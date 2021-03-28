@@ -27,8 +27,7 @@ namespace Devtools.Client.Controllers {
                     var newVal = (Enum.GetName(typeof(WeatherType), value) ?? "").ToUpper();
                     Function.Call(Hash._SET_WEATHER_TYPE_OVER_TIME, newVal, 3f);
                     _weather = value;
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     Log.Error(ex);
                 }
             }

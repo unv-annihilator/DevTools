@@ -94,8 +94,7 @@ namespace Devtools.Client.Controllers {
                 if (NeverWanted) Game.Player.WantedLevel = 0;
 
                 _wantedItem.Value = Game.Player.WantedLevel;
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
 

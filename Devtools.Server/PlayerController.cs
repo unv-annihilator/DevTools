@@ -19,8 +19,7 @@ namespace Devtools.Server {
 
                 Log.Verbose($"Player {source.Name} (net:{source.Handle}) brought player {target.Name} (net:{target.Handle})");
                 target.TriggerEvent("Player.Bring", int.Parse(source.Handle), x, y, z);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
             }
         }

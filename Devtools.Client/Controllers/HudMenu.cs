@@ -44,8 +44,7 @@ namespace Devtools.Client.Controllers {
         private async Task OnTick() {
             try {
                 foreach (var comp in new List<HudComponent>(DisabledComponents)) API.HideHudComponentThisFrame((int) comp);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Log.Error(ex);
                 await BaseScript.Delay(1000);
             }

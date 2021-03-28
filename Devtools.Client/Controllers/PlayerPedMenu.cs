@@ -44,8 +44,7 @@ namespace Devtools.Client.Controllers {
                     if (!await model.Request(10000) || !await Game.Player.ChangeModel(model))
                         UiHelper.ShowNotification("~r~ERROR~s~: Failed to load ped model.");
                     else UiHelper.ShowNotification($"~g~Success~s~: Changed ped model to ~y~{modelName}~s.");
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     Log.Error(ex);
                 }
             };
